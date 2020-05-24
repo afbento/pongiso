@@ -40,7 +40,7 @@
 	defb 1,12,2,0,32,10,33,11,34,16,35,17,36,13,64,8,65,9,66,18,67,19,68,8,69,9,98,8,99,9,100,10,101,11
 #endasm	
 
-int ai,p1,p2,x1,y1,x2,y2,x3,y3,xx,yy,yyy,xk,spd,spd1,spd2;
+int ai,ai1,p1,p2,x1,y1,x2,y2,x3,y3,xx,yy,yyy,xk,spd,spd1,spd2;
 
 char sp1,sp2,sp3,sp4,cort;
 
@@ -117,7 +117,7 @@ main()
 	xor a
 	call 0xc3     // cls
 
-	ld a,10
+    ld a,10
 	ld hl,0x1800+10*32+7
 	ld (_ai),hl
 	call _display // fori=0to16:vpoke&h1800+di(10,i*2)+10*32+7,di(10,i*2+1):next
@@ -136,7 +136,7 @@ main()
 	ld hl,0x1800+4*32+19
 	ld (_ai),hl
 	call _display // fori=0to16:vpoke&h1800+di(12,i*2)+4*32+19,di(12,i*2+1):next
-	
+
 	ld hl,0
 	._dly_abert
 	inc hl
@@ -476,7 +476,7 @@ main()
 	cp 128
 	jr nc,_nequ3
 	ld a,(_xk)
-	ld d,114-10
+	ld d,118-10
 	add a,d
 	ld c,a
 	ld a,(_y3)
@@ -543,7 +543,7 @@ main()
 	._nequ4
 	
 	ld a,(_xk)
-	ld d,114
+	ld d,118-5
 	add a,d
 	ld c,a
 	ld a,(_y3)
@@ -563,7 +563,7 @@ main()
 	._nequ5
 	
 	ld a,(_xk)
-	ld d,-45
+	ld d,-45+5
 	add a,d
 	ld c,a
 	ld a,(_y3)
