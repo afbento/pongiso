@@ -1,3 +1,4 @@
+#include<stdio.h>
 #asm
 	._tiles_1
 	defb 0,0,0,0,0,0,0,0
@@ -46,6 +47,8 @@ char sp1,sp2,sp3,sp4,cort;
 
 main() 
 {
+
+
 
 #asm
 	ld a,32
@@ -274,12 +277,16 @@ main()
 
 	ld a,(_spd1)
 	cp 0
-	jr nz,_skp_spd1
+	jp nz,_skp_spd1
 	ld a,20
 	ld (_spd1),a
 	
+	ld a,1
+	call 0xd5  //GTSTCK
+	ld b,a
 	ld a,0
-	call 0xd5
+	call 0xd5  //GTSTCK
+	or b
 	ld d,a
 	cp 3
 	jr nz,_ndir1
@@ -306,9 +313,23 @@ main()
 	dec a
 	ld (_y1),a
    ._nesq1	      //j=stick(0):ifj=3andx1<89thenx1=x1+2:y1=y1+1:end:ifj=7andx1>11thenx1=x1-2:y1=y1-1:end
-   
+
+ 	ld a,5
+	ld b,0
+	call 0x0141    //SNSMAT
+	bit 7,a
+	jr nz,_jp1
+	ld b,7
+   ._jp1
+	bit 5,a
+	jr nz,_jp2
+	ld b,3
+   ._jp2
+	push bc
 	ld a,2
-	call 0xd5
+	call 0xd5      //GTSTCK
+	pop bc
+	or b
 	ld d,a
 	cp 3
 	jr nz,_ndir2
